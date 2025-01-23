@@ -1,0 +1,4 @@
+1. Philosophen und Gabeln initialisieren
+2. Threads erstellen
+3. Zeitmessung hinzufügen
+4. Simulation steuern
