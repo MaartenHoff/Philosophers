@@ -6,7 +6,7 @@
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:30:02 by maahoff           #+#    #+#             */
-/*   Updated: 2025/01/23 19:33:41 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/01/24 18:10:44 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,14 @@ typedef struct s_args
 	int	num_of_times_each_philo_must_eat;
 }	t_args;
 
-int		parse_arguments(int argc, char **argv, t_args **args);
+typedef struct s_philo
+{
+	int	id;
+}	t_philo;
+
+int		parse_arguments(int argc, char **argv, t_args *args);
+int		init_philos(t_args args, t_philo **philos);
+void	free_philos(t_philo **philos);
 void	handle_error(int error_code);
 // utils
 int		ft_atoi(const char *str);
