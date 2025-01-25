@@ -6,7 +6,7 @@
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:30:02 by maahoff           #+#    #+#             */
-/*   Updated: 2025/01/25 18:03:08 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/01/25 20:18:15 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define ERR_INVAL	22		// Invalid argument
 # define ERR_ARGC	128		// Wrong number of arguments
 # define ERR_THREAD 130		// Thread creation failed
+# define ERR_MUTEX	131		// Mutex initialization/destroying failed
 
 typedef struct s_args
 {
@@ -38,16 +39,17 @@ typedef struct s_philo
 	int				id;
 	int				times_eaten;
 	long long		last_meal;
-	pthread_mutex_t	left_fork;
-	pthread_mutex_t	right_fork;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
 	pthread_t		thread;
 	t_args			*args;
 }	t_philo;
 
 typedef struct s_table
 {
-	t_philo	**philos;
-	t_args	*args;
+	t_philo			**philos;
+	pthread_mutex_t	*forks;
+	t_args			*args;
 }	t_table;
 
 //main
@@ -57,7 +59,6 @@ void	*philosophers_life(void *arg);
 
 // free/utils/error
 void	free_table(t_table *table);
-void	free_philos(t_philo **philos);
 void	handle_error(int error_code, t_args *args, t_table *table);
 int		ft_atoi(const char *str);
 

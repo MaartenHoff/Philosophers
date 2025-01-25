@@ -1,9 +1,5 @@
 // Plan für die nächsten Tage:
 
-1. **Mutex-Initialisierung und Zerstörung:**
-   - `pthread_mutex_init` für jede Gabel.
-   - `pthread_mutex_destroy` nach der Simulation für jede Gabel.
-
 2. **Testen der Mutex-Funktionen:**
    - Testen von `pthread_mutex_lock` und `pthread_mutex_unlock` zur Synchronisation.
 
