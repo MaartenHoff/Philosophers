@@ -1,4 +1,41 @@
-1. Philosophen und Gabeln initialisieren
-2. Threads erstellen
-3. Zeitmessung hinzufügen
-4. Simulation steuern
+// Plan für die nächsten Tage:
+
+1. **Mutex-Initialisierung und Zerstörung:**
+   - `pthread_mutex_init` für jede Gabel.
+   - `pthread_mutex_destroy` nach der Simulation für jede Gabel.
+
+2. **Testen der Mutex-Funktionen:**
+   - Testen von `pthread_mutex_lock` und `pthread_mutex_unlock` zur Synchronisation.
+
+3. **Zeitmessung (gettimeofday):**
+   - Hinzufügen von Zeitmessung, um die Simulation zu überwachen.
+   - Startzeit festlegen, Endzeit berechnen und Ausgabe der Laufzeit.
+
+4. **Philosophen-Logik (Basis):**
+   - Schreiben der Grundlogik für die Philosophen (Essen, Nachdenken, Hungern).
+   - Implementieren der Grundzustände.
+
+5. **Philosophen-Mutex-Logik:**
+   - Hinzufügen der Mutex-Logik, um sicherzustellen, dass jeweils nur ein Philosoph eine Gabel benutzen kann.
+   - Implementieren von `pthread_mutex_lock` und `pthread_mutex_unlock` beim Essen und Hunger.
+
+6. **Threads und Synchronisation:**
+   - Sicherstellen, dass die Philosophen-Threads richtig gestartet, verbunden (`pthread_join`) und getrennt (`pthread_detach`) werden.
+   - Korrekte Handhabung der Threads bei Beendigung.
+
+7. **Fehlerbehandlung:**
+   - Fehlerprüfung für alle `pthread_*`-Funktionen (Erstellung, Zerstörung, Lock/Unlock).
+   - Rückgabewerte bei Fehlern (z.B. `ERR_MUTEX` für Mutex-Probleme).
+
+8. **Letzte Tests:**
+   - Vollständige Simulation mit verschiedenen Anzahl Philosophen und maximaler Simulationszeit.
+   - Performance-Messungen und Vermeidung von Deadlocks.
+   - Valgrind-Tests für Speicherlecks.
+
+9. **Abschließende Bereinigungen:**
+   - Alle `malloc`-Allokationen sollten am Ende der Simulation freigegeben werden.
+   - Sicherstellen, dass alle Threads und Mutexes korrekt beendet und freigegeben werden.
+
+10. **Abschluss:**
+   - Funktionalität und Normkonformität testen.
+   - Überprüfung von möglichen Optimierungen (z.B. Effizienz der Mutex-Logik).

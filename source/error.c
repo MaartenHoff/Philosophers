@@ -6,14 +6,18 @@
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 19:04:23 by maahoff           #+#    #+#             */
-/*   Updated: 2025/01/25 17:13:33 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/01/25 18:04:44 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	handle_error(int error_code)
+void	handle_error(int error_code, t_args *args, t_table *table)
 {
+	if (args)
+		free(args);
+	if (table)
+		free_table(table);
 	if (error_code == ERR_ARGC)
 		write(2, "Error: Wrong number of arguments\n", 33);
 	else if (error_code == ERR_INVAL)

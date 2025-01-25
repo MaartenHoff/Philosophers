@@ -6,7 +6,7 @@
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:30:02 by maahoff           #+#    #+#             */
-/*   Updated: 2025/01/25 17:47:20 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/01/25 18:03:08 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	*philosophers_life(void *arg);
 // free/utils/error
 void	free_table(t_table *table);
 void	free_philos(t_philo **philos);
-void	handle_error(int error_code);
+void	handle_error(int error_code, t_args *args, t_table *table);
 int		ft_atoi(const char *str);
 
 // test
