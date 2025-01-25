@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   philosopher.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 19:04:23 by maahoff           #+#    #+#             */
-/*   Updated: 2025/01/25 17:13:33 by maahoff          ###   ########.fr       */
+/*   Created: 2025/01/25 17:34:35 by maahoff           #+#    #+#             */
+/*   Updated: 2025/01/25 17:35:36 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	handle_error(int error_code)
+void	*philosophers_life(void *arg)
 {
-	if (error_code == ERR_ARGC)
-		write(2, "Error: Wrong number of arguments\n", 33);
-	else if (error_code == ERR_INVAL)
-		write(2, "Error: Invalid argument\n", 25);
-	else if (error_code == ERR_NOMEM)
-		write(2, "Error: Memory allocation failed\n", 32);
-	else if (error_code == ERR_THREAD)
-		write(2, "Error: Thread creation failed\n", 30);
-	else
-		write(2, "Error: Unknown error\n", 22);
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
+	printf("philo number %d was created\n", philo->id);
+	return (NULL);
 }

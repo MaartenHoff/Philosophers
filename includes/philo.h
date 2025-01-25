@@ -6,7 +6,7 @@
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:30:02 by maahoff           #+#    #+#             */
-/*   Updated: 2025/01/24 18:10:44 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/01/25 17:47:20 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <string.h>
+# include <pthread.h>
 
 # define ERR_NOMEM	12		// Memory allocation error
 # define ERR_INVAL	22		// Invalid argument
 # define ERR_ARGC	128		// Wrong number of arguments
+# define ERR_THREAD 130		// Thread creation failed
 
 typedef struct s_args
 {
@@ -32,15 +35,33 @@ typedef struct s_args
 
 typedef struct s_philo
 {
-	int	id;
+	int				id;
+	int				times_eaten;
+	long long		last_meal;
+	pthread_mutex_t	left_fork;
+	pthread_mutex_t	right_fork;
+	pthread_t		thread;
+	t_args			*args;
 }	t_philo;
 
-int		parse_arguments(int argc, char **argv, t_args *args);
-int		init_philos(t_args args, t_philo **philos);
+typedef struct s_table
+{
+	t_philo	**philos;
+	t_args	*args;
+}	t_table;
+
+//main
+int		parse_arguments(int argc, char **argv, t_args **args);
+int		init(t_args *args, t_table **table);
+void	*philosophers_life(void *arg);
+
+// free/utils/error
+void	free_table(t_table *table);
 void	free_philos(t_philo **philos);
 void	handle_error(int error_code);
-// utils
 int		ft_atoi(const char *str);
+
 // test
 void	print_args(t_args *args);
+
 #endif
