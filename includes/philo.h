@@ -6,7 +6,7 @@
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:30:02 by maahoff           #+#    #+#             */
-/*   Updated: 2025/01/26 14:38:24 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/01/26 19:01:12 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,13 @@ typedef struct s_args
 typedef struct s_philo
 {
 	int				id;
-	int				alive;
 	int				times_eaten;
 	long long		last_meal;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	*grim_reaper_mutex;
+	pthread_mutex_t	*print_mutex;
+	int				*sim_terminated;
 	pthread_t		thread;
 	long long		start_time;
 	t_args			*args;
@@ -52,6 +54,9 @@ typedef struct s_table
 {
 	t_philo			**philos;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	grim_reaper_mutex;
+	int				sim_terminated;
+	pthread_mutex_t	print_mutex;
 	t_args			*args;
 }	t_table;
 
@@ -60,12 +65,17 @@ int			parse_arguments(int argc, char **argv, t_args **args);
 int			init(t_args *args, t_table **table);
 void		*philosophers_life(void *arg);
 
-// free/utils/error
+// free/error
 void		free_table(t_table *table);
 void		handle_error(int error_code, t_args *args, t_table *table);
+
+// utils
 int			ft_atoi(const char *str);
 long long	ft_get_time(void);
 void		kill_solo_philo(t_philo *philo);
+int			ft_sim_terminated(t_philo *philo);
+void		ft_print_state(t_philo *philo, char *state);
+void		some_strange_ft_that_doesnt_fit_anywhere_else(t_philo *philo);
 
 // test
 void		print_args(t_args *args);

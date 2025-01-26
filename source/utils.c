@@ -6,7 +6,7 @@
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 19:09:06 by maahoff           #+#    #+#             */
-/*   Updated: 2025/01/26 14:42:46 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/01/26 17:44:46 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,28 @@ void	kill_solo_philo(t_philo *philo)
 	printf("[%lld] Philosopher %d has taken left fork\n", 
 		(ft_get_time() - philo->start_time), philo->id);
 	usleep(philo->args->time_to_die * 1000);
-	philo->alive = 0;
 	printf("[%lld] Philosopher %d has died\n",
 		(ft_get_time() - philo->start_time), philo->id);
+}
+
+int	ft_sim_terminated(t_philo *philo)
+{
+	pthread_mutex_lock(philo->grim_reaper_mutex);
+	if (*philo->sim_terminated)
+		return (pthread_mutex_unlock(philo->grim_reaper_mutex), 1);
+	pthread_mutex_unlock(philo->grim_reaper_mutex);
+	return (0);
+}
+
+void	ft_print_state(t_philo *philo, char *state)
+{
+	pthread_mutex_lock(philo->print_mutex);
+	if (ft_sim_terminated(philo))
+	{
+		pthread_mutex_unlock(philo->print_mutex);
+		return ;
+	}
+	printf("%lld %d %s\n", 
+		(ft_get_time() - philo->start_time), philo->id + 1, state);
+	pthread_mutex_unlock(philo->print_mutex);
 }

@@ -6,7 +6,7 @@
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:24:58 by maahoff           #+#    #+#             */
-/*   Updated: 2025/01/26 14:50:31 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/01/26 15:01:06 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static int	start_sim(t_table *table)
 	i = 0;
 	while (i < table->args->num_of_philo)
 	{
+		table->philos[i]->start_time = ft_get_time();
 		if (pthread_create(&table->philos[i]->thread, NULL, &philosophers_life, 
 				table->philos[i]) != 0)
 			return (ERR_THREAD);

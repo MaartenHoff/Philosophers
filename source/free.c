@@ -6,7 +6,7 @@
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:48:02 by maahoff           #+#    #+#             */
-/*   Updated: 2025/01/25 20:18:07 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/01/26 17:30:02 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	free_table(t_table *table)
 			pthread_mutex_destroy(&table->forks[i]);
 		i++;
 	}
+	pthread_mutex_destroy(&table->grim_reaper_mutex);
+	pthread_mutex_destroy(&table->print_mutex);
 	if (table->philos)
 		free(table->philos);
 	if (table->forks)

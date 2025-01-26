@@ -6,7 +6,7 @@
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:44:13 by maahoff           #+#    #+#             */
-/*   Updated: 2025/01/26 14:16:09 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/01/26 17:28:39 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 static int	init_philo(int i, t_philo ***philos, t_table *table)
 {
 	(*philos)[i]->id = i;
-	(*philos)[i]->alive = 1;
 	(*philos)[i]->times_eaten = 0;
 	(*philos)[i]->last_meal = 0;
 	(*philos)[i]->left_fork = &table->forks[i];
 	(*philos)[i]->right_fork = &table->forks[(i + 1) % 
 		table->args->num_of_philo];
-	(*philos)[i]->start_time = ft_get_time();
+	(*philos)[i]->sim_terminated = &table->sim_terminated;
+	(*philos)[i]->grim_reaper_mutex = &table->grim_reaper_mutex;
+	(*philos)[i]->print_mutex = &table->print_mutex;
 	(*philos)[i]->args = table->args;
 	return (0);
 }
@@ -72,6 +73,11 @@ int	init(t_args *args, t_table **table)
 	*table = malloc(sizeof(t_table));
 	if (!*table)
 		return (ERR_NOMEM);
+	(*table)->sim_terminated = 0;
+	if (pthread_mutex_init(&(*table)->grim_reaper_mutex, NULL) != 0)
+		return (ERR_MUTEX);
+	if (pthread_mutex_init(&(*table)->print_mutex, NULL) != 0)
+		return (ERR_MUTEX);
 	(*table)->args = args;
 	error_check = init_forks(table);
 	if (error_check)
