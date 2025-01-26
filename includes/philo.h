@@ -6,7 +6,7 @@
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:30:02 by maahoff           #+#    #+#             */
-/*   Updated: 2025/01/26 19:01:12 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/01/26 19:25:00 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void		kill_solo_philo(t_philo *philo);
 int			ft_sim_terminated(t_philo *philo);
 void		ft_print_state(t_philo *philo, char *state);
 void		some_strange_ft_that_doesnt_fit_anywhere_else(t_philo *philo);
+int			philo_dead(t_philo *philo);
 
 // test
 void		print_args(t_args *args);
