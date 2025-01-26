@@ -6,7 +6,7 @@
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:44:13 by maahoff           #+#    #+#             */
-/*   Updated: 2025/01/25 20:11:41 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/01/26 14:16:09 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 static int	init_philo(int i, t_philo ***philos, t_table *table)
 {
 	(*philos)[i]->id = i;
+	(*philos)[i]->alive = 1;
 	(*philos)[i]->times_eaten = 0;
 	(*philos)[i]->last_meal = 0;
 	(*philos)[i]->left_fork = &table->forks[i];
 	(*philos)[i]->right_fork = &table->forks[(i + 1) % 
 		table->args->num_of_philo];
+	(*philos)[i]->start_time = ft_get_time();
 	(*philos)[i]->args = table->args;
 	return (0);
 }

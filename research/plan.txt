@@ -1,19 +1,8 @@
 // Plan für die nächsten Tage:
 
-2. **Testen der Mutex-Funktionen:**
-   - Testen von `pthread_mutex_lock` und `pthread_mutex_unlock` zur Synchronisation.
-
-3. **Zeitmessung (gettimeofday):**
-   - Hinzufügen von Zeitmessung, um die Simulation zu überwachen.
-   - Startzeit festlegen, Endzeit berechnen und Ausgabe der Laufzeit.
-
-4. **Philosophen-Logik (Basis):**
-   - Schreiben der Grundlogik für die Philosophen (Essen, Nachdenken, Hungern).
-   - Implementieren der Grundzustände.
-
-5. **Philosophen-Mutex-Logik:**
-   - Hinzufügen der Mutex-Logik, um sicherzustellen, dass jeweils nur ein Philosoph eine Gabel benutzen kann.
-   - Implementieren von `pthread_mutex_lock` und `pthread_mutex_unlock` beim Essen und Hunger.
+5. **sim stop when one philo is Dead
+   - grim reaper thread erstellen
+   - check wie der scheiss funktioniert
 
 6. **Threads und Synchronisation:**
    - Sicherstellen, dass die Philosophen-Threads richtig gestartet, verbunden (`pthread_join`) und getrennt (`pthread_detach`) werden.

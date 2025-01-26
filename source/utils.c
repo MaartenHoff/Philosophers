@@ -6,7 +6,7 @@
 /*   By: maahoff <maahoff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 19:09:06 by maahoff           #+#    #+#             */
-/*   Updated: 2025/01/25 17:23:31 by maahoff          ###   ########.fr       */
+/*   Updated: 2025/01/26 14:42:46 by maahoff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,22 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (pn * (int)result);
+}
+
+long long	ft_get_time(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
+void	kill_solo_philo(t_philo *philo)
+{
+	printf("[%lld] Philosopher %d has taken left fork\n", 
+		(ft_get_time() - philo->start_time), philo->id);
+	usleep(philo->args->time_to_die * 1000);
+	philo->alive = 0;
+	printf("[%lld] Philosopher %d has died\n",
+		(ft_get_time() - philo->start_time), philo->id);
 }
